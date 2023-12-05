@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  web:
+    image: webdevops/php-nginx-dev:8.2-alpine
+    working_dir: /app
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+    env_file:
+      - ".docker.env"
+      - ".app.env"
+
+  mariadb:
+    image: mariadb:11.2
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - ".docker.env"
