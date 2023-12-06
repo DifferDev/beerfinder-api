@@ -27,7 +27,7 @@ class IdTest extends TestCase
     public function testValueObjectShouldReceiveAValidUuidValue(): void
     {
         $id = new Id('2be2072a-1a5c-4c8a-a400-8361008d39ea');
-        $this->assertEquals('2be2072a-1a5c-4c8a-a400-8361008d39ea', $id->getValue());
+        $this->assertEquals('2be2072a-1a5c-4c8a-a400-8361008d39ea', $id);
     }
 
     public static function idNegativeProvider(): array

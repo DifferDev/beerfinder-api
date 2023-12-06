@@ -126,6 +126,11 @@ class DatabaseRepository implements RepositoryInterface
         $statement->execute();
     }
 
+    /**
+     * @param BaseEntity $entity
+     * @return string
+     * @throws Exception
+     */
     private function insert(BaseEntity $entity): string
     {
         /**
@@ -134,6 +139,8 @@ class DatabaseRepository implements RepositoryInterface
         $entityFields = $this->hydrator->extract($entity);
 
         $fields = implode(', ', array_keys($entityFields));
+        $values = [];
+
         foreach ($entityFields as $value) {
             $values[] = "'$value'";
         }
