@@ -8,7 +8,7 @@ use BeerFinder\Domain\ValueObject\Interface\ValueObjectInterface;
 use Respect\Validation\Validator as v;
 use Exception;
 
-class Id implements ValueObjectInterface
+readonly class Id implements ValueObjectInterface
 {
     /**
      * @param int|string $value
@@ -67,5 +67,10 @@ class Id implements ValueObjectInterface
             throw new \Exception('Invalid Id number');
         }
         return true;
+    }
+
+    public function __toString(): string
+    {
+        return (string)$this->value;
     }
 }

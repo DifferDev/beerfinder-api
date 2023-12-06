@@ -37,14 +37,14 @@ class IntegerPriceTest extends TestCase
     public function testPriceShouldBeAValidCommaFloatValue(): void
     {
         $price = new IntegerPrice('20,23');
-        $this->assertEquals('2023', $price->getValue());
+        $this->assertEquals('2023', (string)$price);
     }
 
     /**
      * @return void
      * @throws Exception
      */
-    public function testPriceShouldBeAInValidIntegerValue(): void
+    public function testPriceShouldBeAInvalidIntegerValue(): void
     {
         $this->expectExceptionMessage('Price should be in right format ex: 0.22 or 022, provided: 01');
         $price = new IntegerPrice('0.1');

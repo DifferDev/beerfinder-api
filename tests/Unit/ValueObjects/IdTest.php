@@ -35,7 +35,7 @@ class IdTest extends TestCase
         return [
             [-123, \Exception::class, 'Invalid Id number'],
             ['123-123-123', \Exception::class, 'Id should be a valid UUID'],
-            ['e2072a-1a5c-4c8a-a400-83610d39ea', \Exception::class, 'Id should be a valid UUID'],
+            ['e2072a-1a5c-4c8a-a400-83610d39ea', \Exception::class, 'Id should be a valid UUID']
         ];
     }
 

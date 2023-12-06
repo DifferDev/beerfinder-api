@@ -3,6 +3,9 @@
     "source": {
         "directories": [
             "src"
+        ],
+        "excludes": [
+            "{Infrastructure/.*}"
         ]
     },
     "logs": {
@@ -10,6 +13,8 @@
     },
     "tmpDir": "tmp",
     "mutators": {
-        "@default": true
+        "@default": true,
+        "@function_signature": false,
+        "@cast": false
     }
 }

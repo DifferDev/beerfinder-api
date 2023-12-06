@@ -18,3 +18,10 @@ services:
       - "3306:3306"
     env_file:
       - ".docker.env"
+
+  mongodb:
+    image: mongo:7.0-jammy
+    ports:
+      - "27017:27017"
+    env_file:
+      - ".docker.env"

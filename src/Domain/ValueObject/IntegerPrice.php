@@ -7,7 +7,7 @@ namespace BeerFinder\Domain\ValueObject;
 use BeerFinder\Domain\ValueObject\Interface\ValueObjectInterface;
 use Exception;
 
-class IntegerPrice implements ValueObjectInterface
+readonly class IntegerPrice implements ValueObjectInterface
 {
     protected string $value;
 
@@ -29,7 +29,7 @@ class IntegerPrice implements ValueObjectInterface
      */
     protected function validate(string $value): void
     {
-        if (mb_strlen($value, 'UTF-8') < 3) {
+        if (strlen($value) < 3) {
             throw new Exception("Price should be in right format ex: 0.22 or 022, provided: $value");
         }
     }
@@ -38,6 +38,11 @@ class IntegerPrice implements ValueObjectInterface
      * @return string
      */
     public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public function __toString(): string
     {
         return $this->value;
     }

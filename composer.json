@@ -12,7 +12,11 @@
   },
   "require": {
     "ext-mbstring": "*",
-    "respect/validation": "^2.2"
+    "respect/validation": "^2.2",
+    "ext-pdo": "*",
+    "laminas/laminas-hydrator": "^4.15",
+    "slim/slim": "^4.12",
+    "slim/psr7": "^1.6"
   },
   "scripts": {
     "test": "phpunit",
