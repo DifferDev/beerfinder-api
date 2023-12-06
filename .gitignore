@@ -7,3 +7,4 @@
 
 .app.env
 .docker.env
+composer.lock
