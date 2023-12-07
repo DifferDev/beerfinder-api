@@ -8,10 +8,11 @@ A simple Geolocation Beers API finder for PHPConference 2023 Training by Leonard
 2. Setup do projeto
 3. Conhecendo o PHPStan
 4. Conhecendo o Infection
-5. TDD com Domain
+5. TDD com Domain (Beer price cannot be zero)
 6. TDD com UseCases
-7. Resolvendo I/O com Presenter
-8. Adicionando MongoDB em busca de Locations
+7. Resolvendo I/O JSON com Presenter
+8. Adicionando Slim e Container de DI
+9. Adicionando MongoDB em busca de Locations (Extra)
 
 # How to start?
 ```bash

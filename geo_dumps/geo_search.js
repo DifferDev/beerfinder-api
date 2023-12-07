@@ -23,7 +23,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Golden Hops Elixir",
             "type": "IPA (India Pale Ale)",
-            "price": 1250
+            "price": "1250"
         },
         "geometry": {
             "coordinates": [
@@ -39,7 +39,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Midnight Velvet Porter",
             "type": "Stout",
-            "price": 899
+            "price": "899"
         },
         "geometry": {
             "coordinates": [
@@ -55,7 +55,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Citrus Zest Saison",
             "type": "Pilsner",
-            "price": 1075
+            "price": "1075"
         },
         "geometry": {
             "coordinates": [
@@ -71,7 +71,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Mountain Peak IPA",
             "type": "Wheat Beer",
-            "price": 1233
+            "price": "1233"
         },
         "geometry": {
             "coordinates": [
@@ -87,7 +87,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Amber Twilight Ale",
             "type": "Amber Ale",
-            "price": 990
+            "price": "990"
         },
         "geometry": {
             "coordinates": [
@@ -103,7 +103,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Midnight Velvet Porter",
             "type": "Porter",
-            "price": 1150
+            "price": "1150"
         },
         "geometry": {
             "coordinates": [
@@ -119,7 +119,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Harvest Wheat Whispers",
             "type": "Wheat Beer",
-            "price": 850
+            "price": "850"
         },
         "geometry": {
             "coordinates": [
@@ -135,7 +135,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Bavarian Bliss Bock",
             "type": "Bock",
-            "price": 1350
+            "price": "1350"
         },
         "geometry": {
             "coordinates": [
@@ -151,7 +151,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Mystic Oak Amber Ale",
             "type": "Amber Ale",
-            "price": 1225
+            "price": "1225"
         },
         "geometry": {
             "coordinates": [
@@ -167,7 +167,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Tropical Breeze Lager",
             "type": "Lager",
-            "price": 1050
+            "price": "1050"
         },
         "geometry": {
             "coordinates": [
@@ -183,7 +183,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Enchanted Abbey Tripel",
             "type": "Belgian Tripel",
-            "price": 1575
+            "price": "1575"
         },
         "geometry": {
             "coordinates": [
@@ -199,7 +199,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Frosted Raspberry Wheat",
             "type": "Wheat Beer",
-            "price": 900
+            "price": "900"
         },
         "geometry": {
             "coordinates": [
@@ -215,7 +215,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Velvet Vanilla Cream Ale",
             "type": "Cream Ale",
-            "price": 1100
+            "price": "1100"
         },
         "geometry": {
             "coordinates": [
@@ -231,7 +231,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Golden Hops Elixir",
             "type": "IPA",
-            "price": 1280
+            "price": "1280"
         },
         "geometry": {
             "coordinates": [
@@ -247,7 +247,7 @@ db.locations.insertMany([
         "properties": {
             "name": "Cherry Blossom Euphoria",
             "type": "Sour Beer",
-            "price": 1420
+            "price": "1420"
         },
         "geometry": {
             "coordinates": [
