@@ -5,6 +5,7 @@ namespace Integration;
 use BeerFinder\Application\UseCase\Beer\SearchBeerQuery;
 use BeerFinder\Domain\Model\Beer;
 use BeerFinder\Infrastructure\GenericRepository\Interfaces\RepositoryInterface;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -28,10 +29,21 @@ class SearchBeerQueryTest extends TestCase
         $stub->shouldReceive('setCollection')
             ->with('beers');
 
+        $stub->shouldReceive('setMapClassName');
+
+        $stubHydrator = \Mockery::mock(ClassMethodsHydrator::class);
+        $stubHydrator->shouldReceive('extract')
+                     ->andReturn([
+                         'id' => '12',
+                         'name' => 'My beer',
+                         'type' => 'IPA',
+                         'price' => '1233'
+                     ]);
+
         $query = new \stdClass();
         $query->id = 12;
 
-        $searchBeerQuery = new SearchBeerQuery($stub);
+        $searchBeerQuery = new SearchBeerQuery($stub, $stubHydrator);
         $result = $searchBeerQuery->handle($query);
 
         /**
@@ -39,6 +51,6 @@ class SearchBeerQueryTest extends TestCase
          */
         $beerResult = $result['result'];
 
-        $this->assertEquals(12, $beerResult->getId());
+        $this->assertEquals(12, $beerResult['id']);
     }
 }
