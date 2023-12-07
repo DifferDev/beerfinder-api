@@ -9,9 +9,9 @@ class Location extends BaseEntity
 {
     private Id $beerId;
 
-    private float $latitude;
+    private float|string $latitude;
 
-    private float $longitude;
+    private float|string $longitude;
 
     public function getBeerId(): int|string
     {
@@ -23,22 +23,22 @@ class Location extends BaseEntity
         $this->beerId = new Id($beerId);
     }
 
-    public function getLatitude(): float
+    public function getLatitude(): float|string
     {
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude): void
+    public function setLatitude(float|string $latitude): void
     {
         $this->latitude = $latitude;
     }
 
-    public function getLongitude(): float
+    public function getLongitude(): float|string
     {
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude): void
+    public function setLongitude(float|string $longitude): void
     {
         $this->longitude = $longitude;
     }

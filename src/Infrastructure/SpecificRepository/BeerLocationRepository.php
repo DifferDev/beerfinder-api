@@ -6,7 +6,6 @@ use BeerFinder\Domain\Model\Location;
 
 class BeerLocationRepository implements BeerLocationRepositoryInterface
 {
-
     /**
      * @param float $latitude
      * @param float $longitude

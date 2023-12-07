@@ -7,38 +7,23 @@ use Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 use Laminas\Hydrator\Strategy\CollectionStrategy;
 use Laminas\Hydrator\Strategy\SerializableStrategy;
 use Laminas\Serializer\Adapter\Json;
+use Peroxide\DependencyInjection\Container;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$pdo = new PDO('mysql:dbname=beerfinder;host=mariadb', 'root', '123456');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+AppFactory::setContainer(
+    new Container(require __DIR__ . '/../config/dependencies.php')
+);
 
+$app = AppFactory::create();
 
+$app->addRoutingMiddleware();
 
-$hydrator = new ClassMethodsHydrator();
-$hydrator->setNamingStrategy(new UnderscoreNamingStrategy());
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
+require __DIR__ . '/../config/routes.php';
 
-$repository = new DatabaseRepository($pdo, $hydrator);
-
-try {
-    $repository->setCollection('beers');
-    $repository->setMapClassName(Beer::class);
-
-    $beers = $repository->findAll();
-    $beer = $repository->findById(10);
-
-    $collectionHydrator = new CollectionStrategy(
-        $hydrator,
-        Beer::class
-    );
-
-    echo json_encode($hydrator->extract($beer), JSON_THROW_ON_ERROR|JSON_PRETTY_PRINT, 512) . PHP_EOL;
-//    echo json_encode(
-//        $collectionHydrator->extract($beers),
-//        JSON_PRETTY_PRINT
-//    );
-
-} catch (\Exception $ex) {
-    echo $ex->getMessage();
-}
+$app->run();
