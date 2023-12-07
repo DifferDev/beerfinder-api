@@ -21,6 +21,29 @@ $hydrator->setNamingStrategy(new UnderscoreNamingStrategy());
 
 $repository = new DatabaseRepository($pdo, $hydrator);
 
+$client = new \MongoDB\Client("mongodb://root:123456@mongodb:27017");
+
+$db = $client->beerfinder;
+$result = $db->locations->find([
+    'geometry' => [
+        '$nearSphere' => [
+            '$geometry' => [
+                'type' => "Point",
+                'coordinates' => [
+                    -46.640607575424866,
+                    -23.557036821754764
+                ]
+            ],
+            '$maxDistance' => 1000
+        ]
+    ]
+]);
+
+foreach ($result as $element) {
+    var_dump(bin2hex($element->_id));
+}
+
+/*
 try {
     $repository->setCollection('beers');
     $repository->setMapClassName(Beer::class);
@@ -42,3 +65,4 @@ try {
 } catch (\Exception $ex) {
     echo $ex->getMessage();
 }
+*/

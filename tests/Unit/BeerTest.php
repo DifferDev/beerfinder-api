@@ -42,6 +42,7 @@ class BeerTest extends TestCase
             ['Beer 3', 'N', '100', '$type should be more then 1 char'],
             ['AA', 'S', '100', '$type should be more then 1 char'],
             ['Á', 'A', '200', '$name should be more then 1 char'],
+            ['Beer Bock', 'Bock', '000', 'Price should not be zero']
         ];
     }
 
