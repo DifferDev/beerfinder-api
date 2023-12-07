@@ -16,7 +16,8 @@
     "slim/slim": "^4.12",
     "slim/psr7": "^1.6",
     "ext-mbstring": "*",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "laminas/laminas-serializer": "^2.17"
   },
   "scripts": {
     "test": "phpunit",

@@ -3,7 +3,7 @@ CREATE TABLE `beers`
     `id`    int(11)      NOT NULL AUTO_INCREMENT,
     `name`  varchar(255) NOT NULL,
     `type`  varchar(255) NOT NULL,
-    `price` int          NOT NULL,
+    `price` varchar(255) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -18,25 +18,25 @@ CREATE TABLE `locations`
         FOREIGN KEY (`beer_id`) REFERENCES beers (`id`)
 );
 
-select *
-from locations;
+-- drop table beers;
+-- drop table locations;
 
 INSERT INTO beerfinder.beers (name, type, price)
-VALUES ('Golden Hops Elixir', 'IPA (India Pale Ale)', 1250),
-       ('Midnight Velvet Porter', 'Stout', 899),
-       ('Citrus Zest Saison', 'Pilsner', 1075),
-       ('Mountain Peak IPA', 'Wheat Beer', 1233),
-       ('Amber Twilight Ale', 'Amber Ale', 990),
-       ('Midnight Velvet Porter', 'Porter', 1150),
-       ('Harvest Wheat Whispers', 'Wheat Beer', 850),
-       ('Bavarian Bliss Bock', 'Bock', 1350),
-       ('Mystic Oak Amber Ale', 'Amber Ale', 1225),
-       ('Tropical Breeze Lager', 'Lager', 1050),
-       ('Enchanted Abbey Tripel', 'Belgian Tripel', 1575),
-       ('Frosted Raspberry Wheat', 'Wheat Beer', 900),
-       ('Velvet Vanilla Cream Ale', 'Cream Ale', 1100),
-       ('Golden Hops Elixir', 'IPA', 1280),
-       ('Cherry Blossom Euphoria', 'Sour Beer', 1420)
+VALUES ('Golden Hops Elixir', 'IPA (India Pale Ale)', '1250'),
+       ('Midnight Velvet Porter', 'Stout', '899'),
+       ('Citrus Zest Saison', 'Pilsner', '1075'),
+       ('Mountain Peak IPA', 'Wheat Beer', '1233'),
+       ('Amber Twilight Ale', 'Amber Ale', '990'),
+       ('Midnight Velvet Porter', 'Porter', '1150'),
+       ('Harvest Wheat Whispers', 'Wheat Beer', '850'),
+       ('Bavarian Bliss Bock', 'Bock', '1350'),
+       ('Mystic Oak Amber Ale', 'Amber Ale', '1225'),
+       ('Tropical Breeze Lager', 'Lager', '1050'),
+       ('Enchanted Abbey Tripel', 'Belgian Tripel', '1575'),
+       ('Frosted Raspberry Wheat', 'Wheat Beer', '900'),
+       ('Velvet Vanilla Cream Ale', 'Cream Ale', '1100'),
+       ('Golden Hops Elixir', 'IPA', '1280'),
+       ('Cherry Blossom Euphoria', 'Sour Beer', '1420')
 ;
 
 INSERT INTO beerfinder.locations

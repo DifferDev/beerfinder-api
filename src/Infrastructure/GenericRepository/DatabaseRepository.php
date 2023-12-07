@@ -5,7 +5,9 @@ namespace BeerFinder\Infrastructure\GenericRepository;
 use BeerFinder\Domain\ValueObject\Id;
 use BeerFinder\Infrastructure\GenericRepository\Interfaces\RepositoryInterface;
 use Exception;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\ObjectPropertyHydrator;
+use Laminas\Hydrator\Strategy\CollectionStrategy;
 
 class DatabaseRepository implements RepositoryInterface
 {
@@ -18,7 +20,7 @@ class DatabaseRepository implements RepositoryInterface
 
     public function __construct(
         protected \PDO $connection,
-        protected ObjectPropertyHydrator $hydrator
+        protected ClassMethodsHydrator $hydrator
     ) {
     }
 
@@ -53,12 +55,20 @@ class DatabaseRepository implements RepositoryInterface
         $statement = $this->connection->prepare($query);
         $statement->execute([$id]);
 
-        if (false === $entity = $statement->fetchObject($this->mapClassName)) {
-            throw new \Exception('Entity not found');
+        $entityArray = $statement->fetch(\PDO::FETCH_ASSOC);
+        if (false === $entityArray) {
+            throw new \Exception('Error on get entity');
         }
-        return $entity;
+
+        $entityObject = new $this->mapClassName;
+        $this->hydrator->hydrate((array)$entityArray, $entityObject);
+
+        return $entityObject;
     }
 
+    /**
+     * @return array<object|BaseEntity>
+     */
     public function findAll(): array
     {
         $query = <<<SQL
@@ -69,12 +79,17 @@ class DatabaseRepository implements RepositoryInterface
         $statement = $this->connection->prepare($query);
         $statement->execute();
 
-        $entities = $statement->fetchAll(\PDO::FETCH_CLASS, $this->mapClassName);
+        $entities = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         if (0 === count($entities)) {
             return [];
         }
-        return $entities;
+
+        $collectionHydrator = new CollectionStrategy(
+            $this->hydrator,
+            $this->mapClassName
+        );
+        return $collectionHydrator->hydrate($entities);
     }
 
     /**
@@ -84,8 +99,8 @@ class DatabaseRepository implements RepositoryInterface
      */
     public function save(BaseEntity $entity): void
     {
-        if (false === isset($entity->id)) {
-            $entity->id = new Id($this->insert($entity));
+        if (null === $entity->getId()) {
+            $entity->setId((int)$this->insert($entity));
             return;
         }
         $this->update($entity);
@@ -103,27 +118,28 @@ class DatabaseRepository implements RepositoryInterface
      */
     private function update(BaseEntity $entity): void
     {
-        $fields = [];
-
         /**
          * @var array<string, string> $entityFields
          */
         $entityFields = $this->hydrator->extract($entity);
 
+        $fields = [];
         foreach ($entityFields as $column => $value) {
-            $value = (string)$value;
-            $fields[] = "$column='$value'";
+            if ($column === 'id') {
+                continue;
+            }
+            $fields[] = "$column=:$column";
         }
         $fieldsToQuery = implode(', ', $fields);
 
         $query = <<<SQL
             UPDATE $this->collectionName
             SET $fieldsToQuery
-            WHERE id = $entity->id
+            WHERE id = :id
         SQL;
 
         $statement = $this->connection->prepare($query);
-        $statement->execute();
+        $statement->execute($entityFields);
     }
 
     /**
@@ -137,6 +153,7 @@ class DatabaseRepository implements RepositoryInterface
          * @var array<string, string> $entityFields
          */
         $entityFields = $this->hydrator->extract($entity);
+        unset($entityFields['id']);
 
         $fields = implode(', ', array_keys($entityFields));
         $values = [];

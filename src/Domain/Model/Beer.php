@@ -8,11 +8,37 @@ use BeerFinder\Infrastructure\GenericRepository\BaseEntity;
 
 class Beer extends BaseEntity
 {
-    public string $name;
+    private string $name;
+    private string $type;
+    private IntegerPrice $price;
 
-    public string $brand;
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
-    public string $type;
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
 
-    public IntegerPrice $price;
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    public function getPrice(): string
+    {
+        return $this->price->getValue();
+    }
+
+    public function setPrice(string $price): void
+    {
+        $this->price = new IntegerPrice($price);
+    }
 }
