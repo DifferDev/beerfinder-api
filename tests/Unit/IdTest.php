@@ -22,6 +22,12 @@ class IdTest extends TestCase
         $this->assertEquals(123, $id->getValue());
     }
 
+    public function testValueObjectShouldReceiveAValidNumber1Value(): void
+    {
+        $id = new Id(1);
+        $this->assertEquals(1, $id->getValue());
+    }
+
     /**
      * @return void
      * @throws Exception

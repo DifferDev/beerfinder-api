@@ -49,6 +49,7 @@ class Beer extends BaseEntity
      */
     public function validate(): void
     {
+        $this->checkPrice();
         $this->checkValue('name');
         $this->checkValue('type');
         $this->checkValue('price');
@@ -66,6 +67,13 @@ class Beer extends BaseEntity
         }
         if (mb_strlen($this->$field, 'UTF-8') < 2) {
             throw new Exception("\$$field should be more then 1 char");
+        }
+    }
+
+    private function checkPrice(): void
+    {
+        if ('000' === $this->price->getValue()) {
+            throw new Exception('Price cannot be zero!');
         }
     }
 }
