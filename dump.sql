@@ -18,11 +18,11 @@ CREATE TABLE `locations`
         FOREIGN KEY (`beer_id`) REFERENCES beers (`id`)
 );
 
--- drop table beers;
--- drop table locations;
+drop table beers;
+drop table locations;
 
 INSERT INTO beerfinder.beers (name, type, price)
-VALUES ('Golden Hops Elixir', 'IPA (India Pale Ale)', '1250'),
+VALUES ('Red Hops Elixir', 'IPA (India Pale Ale)', '1250'),
        ('Midnight Velvet Porter', 'Stout', '899'),
        ('Citrus Zest Saison', 'Pilsner', '1075'),
        ('Mountain Peak IPA', 'Wheat Beer', '1233'),
@@ -57,3 +57,25 @@ VALUES (1, -46.64728805, -23.55137198),
        (14, -46.65223599, -23.56444091),
        (15, -46.64071875, -23.56664921)
 ;
+
+SELECT *
+FROM locations
+INNER JOIN beers b
+    on locations.beer_id = b.id
+WHERE 6371 * 2 * ASIN(
+    SQRT(
+            POW(SIN((RADIANS(-46.64592616343512) - RADIANS(latitude)) / 2), 2) +
+            COS(RADIANS(-46.64592616343512)) * COS(RADIANS(latitude)) *
+            POW(SIN((RADIANS(-23.560764242448684) - RADIANS(longitude)) / 2), 2)
+    )
+) < 1;
+
+SELECT *
+FROM locations
+WHERE 6371 * 2 * ASIN(
+    SQRT(
+        POW(SIN((RADIANS(:search_latitude) - RADIANS(latitude)) / 2), 2) +
+        COS(RADIANS(:search_latitude)) * COS(RADIANS(latitude)) *
+        POW(SIN((RADIANS(:search_longitude) - RADIANS(longitude)) / 2), 2)
+    )
+) < :radius;

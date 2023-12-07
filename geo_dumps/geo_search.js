@@ -21,7 +21,7 @@ db.locations.insertMany([
         "_id": UUID(),
         "type": "Feature",
         "properties": {
-            "name": "Golden Hops Elixir",
+            "name": "Red Hops Elixir",
             "type": "IPA (India Pale Ale)",
             "price": "1250"
         },
