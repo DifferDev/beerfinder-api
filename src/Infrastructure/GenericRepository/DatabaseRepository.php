@@ -60,7 +60,7 @@ class DatabaseRepository implements RepositoryInterface
             throw new \Exception('Error on get entity');
         }
 
-        $entityObject = new $this->mapClassName;
+        $entityObject = new $this->mapClassName();
         $this->hydrator->hydrate((array)$entityArray, $entityObject);
 
         return $entityObject;
