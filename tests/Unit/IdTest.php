@@ -1,11 +1,13 @@
 <?php
 
-namespace Unit\ValueObjects;
+namespace Unit;
 
 use BeerFinder\Domain\ValueObject\Id;
+use BeerFinder\Domain\ValueObject\IntegerPrice;
 use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Id::class)]
@@ -18,6 +20,15 @@ class IdTest extends TestCase
     {
         $id = new Id(123);
         $this->assertEquals(123, $id->getValue());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testValueObjectIdShouldReceiveZeroValue(): void
+    {
+        $id = new Id(1);
+        $this->assertEquals(1, $id->getValue());
     }
 
     /**

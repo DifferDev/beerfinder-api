@@ -5,6 +5,7 @@ namespace BeerFinder\Domain\Model;
 use BeerFinder\Domain\ValueObject\Id;
 use BeerFinder\Domain\ValueObject\IntegerPrice;
 use BeerFinder\Infrastructure\GenericRepository\BaseEntity;
+use Exception;
 
 class Beer extends BaseEntity
 {
@@ -40,5 +41,31 @@ class Beer extends BaseEntity
     public function setPrice(string $price): void
     {
         $this->price = new IntegerPrice($price);
+    }
+
+    /**
+     * @return void
+     * @throws Exception
+     */
+    public function validate(): void
+    {
+        $this->checkValue('name');
+        $this->checkValue('type');
+        $this->checkValue('price');
+    }
+
+    /**
+     * @param string $field
+     * @return void
+     * @throws Exception
+     */
+    private function checkValue(string $field): void
+    {
+        if ('' === $this->$field) {
+            throw new Exception("\$$field should be provided");
+        }
+        if (mb_strlen($this->$field, 'UTF-8') < 2) {
+            throw new Exception("\$$field should be more then 1 char");
+        }
     }
 }

@@ -15,6 +15,7 @@
     "mutators": {
         "@default": true,
         "@function_signature": false,
-        "@cast": false
+        "@cast": false,
+        "@removal": false
     }
 }

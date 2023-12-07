@@ -9,7 +9,7 @@
          beStrictAboutOutputDuringTests="true"
          failOnRisky="true"
          failOnWarning="true"
-         testdox="true"
+         testdox="false"
          colors="true"
     >
     <testsuites>

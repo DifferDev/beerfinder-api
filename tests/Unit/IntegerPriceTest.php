@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit\ValueObjects;
+namespace Unit;
 
 use BeerFinder\Domain\ValueObject\IntegerPrice;
 use Exception;
