@@ -1,6 +1,7 @@
 <?php
 
 use BeerFinder\Controller\BeerController;
+use BeerFinder\Controller\BeerLocationController;
 use Peroxide\DependencyInjection\Container;
 use Slim\Factory\AppFactory;
 
@@ -15,5 +16,9 @@ AppFactory::setContainer(
 $app = AppFactory::create();
 
 $app->get('/beers/{id}', [ BeerController::class, 'get' ]);
+$app->get(
+    '/beers/locations/{latitude}/{longitude}',
+    [ BeerLocationController::class, 'get' ]
+);
 
 $app->run();

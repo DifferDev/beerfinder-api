@@ -6,7 +6,7 @@ interface QueryInterface
 {
     /**
      * @param object $query
-     * @return object[]
+     * @return array<string, array<object>|array<string, mixed>>
      */
     public function handle(object $query): array;
 }

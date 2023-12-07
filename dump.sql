@@ -18,8 +18,10 @@ CREATE TABLE `locations`
         FOREIGN KEY (`beer_id`) REFERENCES beers (`id`)
 );
 
-drop table beers;
-drop table locations;
+-- drop table beers;
+-- drop table locations;
+
+select * from locations;
 
 INSERT INTO beerfinder.beers (name, type, price)
 VALUES ('Red Hops Elixir', 'IPA (India Pale Ale)', '1250'),
@@ -40,7 +42,7 @@ VALUES ('Red Hops Elixir', 'IPA (India Pale Ale)', '1250'),
 ;
 
 INSERT INTO beerfinder.locations
-    (beer_id, latitude, longitude)
+    (beer_id, longitude, latitude)
 VALUES (1, -46.64728805, -23.55137198),
        (2, -46.64807381, -23.54852348),
        (3, -46.64282353, -23.55356562),
@@ -58,17 +60,23 @@ VALUES (1, -46.64728805, -23.55137198),
        (15, -46.64071875, -23.56664921)
 ;
 
-SELECT *
+SELECT
+    locations.id,
+    b.name,
+    b.type,
+    b.price,
+    locations.latitude,
+    locations.longitude
 FROM locations
 INNER JOIN beers b
     on locations.beer_id = b.id
 WHERE 6371 * 2 * ASIN(
     SQRT(
-            POW(SIN((RADIANS(-46.64592616343512) - RADIANS(latitude)) / 2), 2) +
-            COS(RADIANS(-46.64592616343512)) * COS(RADIANS(latitude)) *
-            POW(SIN((RADIANS(-23.560764242448684) - RADIANS(longitude)) / 2), 2)
+            POW(SIN((RADIANS(-23.548918185855413) - RADIANS(latitude)) / 2), 2) +
+            COS(RADIANS(-23.548918185855413)) * COS(RADIANS(latitude)) *
+            POW(SIN((RADIANS(-46.633878644471906) - RADIANS(longitude)) / 2), 2)
     )
-) < 1;
+) < 1.1;
 
 SELECT *
 FROM locations
