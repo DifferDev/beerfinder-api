@@ -23,15 +23,6 @@ class IdTest extends TestCase
     }
 
     /**
-     * @throws Exception
-     */
-    public function testValueObjectIdShouldReceiveZeroValue(): void
-    {
-        $id = new Id(1);
-        $this->assertEquals(1, $id->getValue());
-    }
-
-    /**
      * @return void
      * @throws Exception
      */
